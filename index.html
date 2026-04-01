@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>심리서사분석 아카데미 6기 커리큘럼 | 마음숲</title>
+<style>
+:root {
+  --forest: #2C5F4A;
+  --forest-m: #3D7A60;
+  --forest-l: #E1F0E8;
+  --forest-xl: #F0F8F4;
+  --blue: #185FA5;
+  --blue-l: #E6F1FB;
+  --blue-xl: #EEF5FB;
+  --amber: #7A4A0B;
+  --amber-l: #FAF0DE;
+  --amber-xl: #FBF4E8;
+  --purple: #7A2870;
+  --purple-l: #F4E6F0;
+  --purple-xl: #F7EEF6;
+  --sa: #1E4D38;
+  --sa-l: #D4EEE3;
+  --sa-xl: #EAF5EF;
+  --text: #1a1a1a;
+  --text-m: #444;
+  --text-s: #777;
+  --border: #e8e4dc;
+  --bg: #FAFAF7;
+  --card: #ffffff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--forest);
+  color: white;
+  text-align: center;
+  padding: 3rem 1.5rem 2.5rem;
+}
+.site-header .label {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9fceb5;
+  margin-bottom: .8rem;
+}
+.site-header h1 {
+  font-family: 'Georgia', 'Apple SD Gothic Neo', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: .6rem;
+  line-height: 1.4;
+}
+.site-header .sub {
+  font-size: 13px;
+  color: #9fceb5;
+  line-height: 1.8;
+}
+
+/* ── SA BANNER ── */
+.sa-banner {
+  background: var(--sa-xl);
+  border-left: 4px solid var(--sa);
+  margin: 2rem auto;
+  max-width: 860px;
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+.sa-banner .sa-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sa);
+  margin-bottom: .3rem;
+}
+.sa-banner p {
+  font-size: 13px;
+  color: #2d5c42;
+  line-height: 1.8;
+}
+.sa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: .7rem;
+}
+.sa-chip {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--sa-l);
+  color: var(--sa);
+  font-weight: 500;
+}
+
+/* ── TABS ── */
+.tabs-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 600px) {
+  .tabs { grid-template-columns: repeat(2, 1fr); }
+}
+.tab-btn {
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  background: var(--card);
+  transition: all .18s;
+  user-select: none;
+}
+.tab-btn:hover { border-color: #aaa; }
+.tab-btn.on-1 { border-color: var(--forest-m); background: var(--forest-xl); }
+.tab-btn.on-2 { border-color: var(--blue); background: var(--blue-xl); }
+.tab-btn.on-3 { border-color: var(--amber); background: var(--amber-xl); }
+.tab-btn.on-4 { border-color: var(--purple); background: var(--purple-xl); }
+.tab-n { font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--text-s); }
+.tab-t { font-size: 12px; font-weight: 500; color: var(--text); margin-top: 4px; line-height: 1.4; }
+.tab-badge {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+.bg1 { background: var(--forest-l); color: var(--forest); }
+.bg2 { background: var(--blue-l); color: var(--blue); }
+.bg3 { background: var(--amber-l); color: var(--amber); }
+.bg4 { background: var(--purple-l); color: var(--purple); }
+
+/* ── PANELS ── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+.sem-overview {
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid transparent;
+}
+.so1 { background: var(--forest-xl); border-color: #b5d8c8; }
+.so2 { background: var(--blue-xl); border-color: #b0ccee; }
+.so3 { background: var(--amber-xl); border-color: #e0c98a; }
+.so4 { background: var(--purple-xl); border-color: #d4aacf; }
+.so-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+.c1 { color: var(--forest-m); } .c2 { color: var(--blue); }
+.c3 { color: var(--amber); } .c4 { color: var(--purple); }
+.so-title { font-family: 'Georgia', 'Apple SD Gothic Neo', serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.so-desc { font-size: 13px; color: var(--text-m); line-height: 1.8; }
+.so-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.so-chip { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-s); background: white; }
+
+/* ── TABLE ── */
+.week-table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; min-width: 540px; }
+thead tr { background: #f5f3ee; }
+th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--text-s);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+td { padding: 11px 12px; border-bottom: 1px solid #f0ede8; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr.sa-row { background: var(--sa-xl); }
+.wk { font-size: 12px; font-weight: 700; color: var(--text-s); white-space: nowrap; width: 46px; }
+.ch-tag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+.ct1 { background: var(--forest-l); color: var(--forest); }
+.ct2 { background: var(--blue-l); color: var(--blue); }
+.ct3 { background: var(--amber-l); color: var(--amber); }
+.ct4 { background: var(--purple-l); color: var(--purple); }
+.ct-sa { background: var(--sa-l); color: var(--sa); }
+.w-title { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.5; }
+.sa-row .w-title { color: var(--sa); }
+.w-sub { font-size: 12px; color: var(--text-s); line-height: 1.6; margin-top: 2px; }
+.sa-row .w-sub { color: #2d5c42; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--forest);
+  color: #9fceb5;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  margin-top: 4rem;
+  font-size: 13px;
+  line-height: 2;
+}
+footer strong { color: white; }
+
+/* ── LAYOUT ── */
+main { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="label">마음숲 심리상담센터</div>
+  <h1>심리서사분석 아카데미 6기<br>주차별 커리큘럼</h1>
+  <p class="sub">총 4학기 · 48주 · 개정 증보판 5부 34장 완전 대응<br>Google Meet 실시간 강의 + 전 강의 녹화 복습 + 별도 인터넷 강의</p>
+</header>
+
+<main>
+
+  <div class="sa-banner">
+    <div class="sa-title">📒 전 학기 자기분석 루틴 — 강의 내내 지속됩니다</div>
+    <p>매 강의 후 자기분석일지 작성 → 격주마다 윤지원 분석가 개별 피드백 → 격주 개인분석 세션.<br>이 루틴이 48주 동안 쌓이면, 이론은 자기 삶의 언어가 되고 치유와 성장이 자연스럽게 따라옵니다.</p>
+    <div class="sa-chips">
+      <span class="sa-chip">매주 자기분석일지 작성</span>
+      <span class="sa-chip">격주 개별 피드백</span>
+      <span class="sa-chip">격주 개인분석 세션</span>
+      <span class="sa-chip">4학기 슈퍼비전</span>
+    </div>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <div class="tab-btn on-1" onclick="go(1,this)">
+        <div class="tab-n">1학기</div>
+        <div class="tab-t">서사적 존재와 신경증</div>
+        <span class="tab-badge bg1">Ch. 1–13</span>
+      </div>
+      <div class="tab-btn" onclick="go(2,this)">
+        <div class="tab-n">2학기</div>
+        <div class="tab-t">정신의 지도</div>
+        <span class="tab-badge bg2">Ch. 14–21</span>
+      </div>
+      <div class="tab-btn" onclick="go(3,this)">
+        <div class="tab-n">3학기</div>
+        <div class="tab-t">감정·욕망과 치유</div>
+        <span class="tab-badge bg3">Ch. 22–31</span>
+      </div>
+      <div class="tab-btn" onclick="go(4,this)">
+        <div class="tab-n">4학기</div>
+        <div class="tab-t">사례·성장·실습</div>
+        <span class="tab-badge bg4">Ch. 32–34+실습</span>
+      </div>
+    </div>
+
+    <!-- ── 1학기 ── -->
+    <div class="panel active" id="p1">
+      <div class="sem-overview so1">
+        <div class="so-num c1">1학기</div>
+        <div class="so-title">인간은 왜 같은 고통을 반복하는가</div>
+        <div class="so-desc">심리서사분석의 가장 근본적인 질문에서 시작합니다. 인간이 서사 속에서만 살 수 있는 이유, 그 서사가 어떻게 고통과 신경증을 만드는지를 이론으로 파악합니다. 이 학기의 모든 개념이 자기분석일지의 첫 번째 재료가 됩니다.</div>
+        <div class="so-chips">
+          <span class="so-chip">1부 · 2부 (Ch.1–13)</span>
+          <span class="so-chip">이론 중심</span>
+          <span class="so-chip">자기분석일지 시작</span>
+          <span class="so-chip">격주 개별 피드백</span>
+        </div>
+      </div>
+      <div class="week-table-wrap">
+        <table>
+          <thead><tr><th>주차</th><th>강의 제목</th><th>강의 내용</th></tr></thead>
+          <tbody>
+            <tr><td class="wk">1주</td><td><span class="ch-tag ct1">Ch.1</span><br><span class="w-title">감정은 실존이다</span></td><td><span class="w-sub">감정이 없으면 존재도 없다 — 서사적 존재의 첫 번째 명제</span></td></tr>
+            <tr><td class="wk">2주</td><td><span class="ch-tag ct1">Ch.2</span><br><span class="w-title">호모 내러티부스 — 서사적 존재로서의 인간</span></td><td><span class="w-sub">인간은 왜 이야기 속에서만 살아갈 수 있는가</span></td></tr>
+            <tr><td class="wk">3주</td><td><span class="ch-tag ct1">Ch.3</span><br><span class="w-title">인간은 어떻게 삶 속에 자기 서사를 펼치는가</span></td><td><span class="w-sub">서사욕망, 추상화, 상징의 탄생</span></td></tr>
+            <tr class="sa-row"><td class="wk">4주</td><td><span class="ch-tag ct-sa">Ch.4</span><br><span class="w-title">서사적 좌표평면계 — 내 안의 지도를 읽는 법</span></td><td><span class="w-sub">성과 속, 선과 악 속의 좌표로서의 자아 / 자기분석 1차 피드백</span></td></tr>
+            <tr><td class="wk">5주</td><td><span class="ch-tag ct1">Ch.5</span><br><span class="w-title">생존·실존·서사적 존속의 방정식</span></td><td><span class="w-sub">왜 인간은 살아가는가 — 세 가지 층위의 삶</span></td></tr>
+            <tr><td class="wk">6주</td><td><span class="ch-tag ct1">Ch.6–7</span><br><span class="w-title">관계는 서사의 교차점이다</span></td><td><span class="w-sub">서사적 좌표 평면계로 보는 인간 관계 / 두 서사의 충돌 구조</span></td></tr>
+            <tr><td class="wk">7주</td><td><span class="ch-tag ct1">Ch.8–9</span><br><span class="w-title">이름 없는 고통의 실체 — 신경증의 개념과 구조</span></td><td><span class="w-sub">아무도 설명해주지 않았던 그 고통 / 반복되는 패턴의 기원</span></td></tr>
+            <tr class="sa-row"><td class="wk">8주</td><td><span class="ch-tag ct-sa">Ch.10</span><br><span class="w-title">끊임없이 우회되는 고통 — 강박증의 구조</span></td><td><span class="w-sub">멈출 수 없는 이유 / 자기분석 2차 피드백</span></td></tr>
+            <tr><td class="wk">9주</td><td><span class="ch-tag ct1">Ch.11</span><br><span class="w-title">개인 서사와 외부 서사의 해리 — 정신증의 구조</span></td><td><span class="w-sub">내면 세계와 외부 세계가 분리될 때</span></td></tr>
+            <tr><td class="wk">10주</td><td><span class="ch-tag ct1">Ch.12</span><br><span class="w-title">고립된 서사적 세계의 고통 — 갈라파고스 증후군</span></td><td><span class="w-sub">자기 자신조차 모르는 이상성의 고통 [개념]</span></td></tr>
+            <tr><td class="wk">11주</td><td><span class="ch-tag ct1">Ch.13</span><br><span class="w-title">보이지 않는 가해와 피해 — 괴물론</span></td><td><span class="w-sub">언어의 수평선 아래에서 오가는 것들 [개념]</span></td></tr>
+            <tr class="sa-row"><td class="wk">12주</td><td><span class="ch-tag ct-sa">정리</span><br><span class="w-title">1학기 통합 — 내 서사의 윤곽을 그리다</span></td><td><span class="w-sub">1·2부 전체 개념 통합 / 자기분석 3차 피드백 / 개인 서사지도 초안 작성</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── 2학기 ── -->
+    <div class="panel" id="p2">
+      <div class="sem-overview so2">
+        <div class="so-num c2">2학기</div>
+        <div class="so-title">정신은 어떻게 설계되어 있는가</div>
+        <div class="so-desc">애착이 형성되는 순간부터 무의식의 지도가 완성되기까지. 감정·욕망·변곡의 작동 원리를 정밀하게 해부합니다. 1학기에서 윤곽이 드러난 자기 서사를 이제 훨씬 깊이 파고들 수 있게 됩니다.</div>
+        <div class="so-chips">
+          <span class="so-chip">3부 (Ch.14–21)</span>
+          <span class="so-chip">정신 구조 심화</span>
+          <span class="so-chip">자기분석 심화</span>
+          <span class="so-chip">격주 개인분석 세션</span>
+        </div>
+      </div>
+      <div class="week-table-wrap">
+        <table>
+          <thead><tr><th>주차</th><th>강의 제목</th><th>강의 내용</th></tr></thead>
+          <tbody>
+            <tr><td class="wk">1주</td><td><span class="ch-tag ct2">Ch.14</span><br><span class="w-title">인간이라는 하드웨어와 서사라는 소프트웨어</span></td><td><span class="w-sub">정신은 어떻게 설계되어 있는가 — 전체 구조의 조망</span></td></tr>
+            <tr><td class="wk">2주</td><td><span class="ch-tag ct2">Ch.15</span><br><span class="w-title">애착에서 서사형성, 심리서사의 포로로서의 삶까지</span></td><td><span class="w-sub">최초의 서사가 삶 전체를 지배하는 방식</span></td></tr>
+            <tr class="sa-row"><td class="wk">3주</td><td><span class="ch-tag ct-sa">Ch.16</span><br><span class="w-title">애착 손상·유기불안·존재의 불안 — 치명적 서사 오류</span></td><td><span class="w-sub">상처는 어떤 오류를 만드는가 / 자기분석 4차 피드백</span></td></tr>
+            <tr><td class="wk">4주</td><td><span class="ch-tag ct2">Ch.17</span><br><span class="w-title">인간 위에 서사를 쓰는 방식</span></td><td><span class="w-sub">동일시·터부·콤플렉스 구조 — 무의식이 우리를 조종하는 방법</span></td></tr>
+            <tr><td class="wk">5주</td><td><span class="ch-tag ct2">Ch.18</span><br><span class="w-title">감정에 대하여 — 인간이 실존하는 방법</span></td><td><span class="w-sub">감정의 발생 원리와 서사적 기능</span></td></tr>
+            <tr class="sa-row"><td class="wk">6주</td><td><span class="ch-tag ct-sa">Ch.19</span><br><span class="w-title">욕망에 대하여 — 인간이 생존하는 방법</span></td><td><span class="w-sub">욕망의 발생 원리와 서사적 기능 / 자기분석 5차 피드백</span></td></tr>
+            <tr><td class="wk">7주</td><td><span class="ch-tag ct2">Ch.20</span><br><span class="w-title">변곡에 대하여 — 결핍에서 행위까지</span></td><td><span class="w-sub">고통이 행동으로 바뀌는 순간의 구조</span></td></tr>
+            <tr><td class="wk">8주</td><td><span class="ch-tag ct2">Ch.21</span><br><span class="w-title">정신의 지도 — 느낌에서 언어적 세계까지</span></td><td><span class="w-sub">감각·감정·욕망·언어의 연결 구조 전체 통합</span></td></tr>
+            <tr class="sa-row"><td class="wk">9주</td><td><span class="ch-tag ct-sa">실습</span><br><span class="w-title">내 정신의 지도를 직접 그리다</span></td><td><span class="w-sub">Ch.14–21 개념을 자기 삶에 적용 / 자기분석 6차 피드백</span></td></tr>
+            <tr><td class="wk">10주</td><td><span class="ch-tag ct2">사례</span><br><span class="w-title">정신의 지도 — 임상 사례 분석</span></td><td><span class="w-sub">실제 사례를 통해 개념이 임상에서 작동하는 방식 확인</span></td></tr>
+            <tr><td class="wk">11주</td><td><span class="ch-tag ct2">사례</span><br><span class="w-title">관계서사 사례 분석</span></td><td><span class="w-sub">두 사람의 서사지도가 충돌하는 실제 사례 분석</span></td></tr>
+            <tr class="sa-row"><td class="wk">12주</td><td><span class="ch-tag ct-sa">정리</span><br><span class="w-title">2학기 통합 — 나의 정신 지도 완성하기</span></td><td><span class="w-sub">전체 개념 통합 / 자기분석 7차 피드백 / 개인 정신지도 완성본 작성</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── 3학기 ── -->
+    <div class="panel" id="p3">
+      <div class="sem-overview so3">
+        <div class="so-num c3">3학기</div>
+        <div class="so-title">이론을 손에 넣고, 무의식의 문을 열다</div>
+        <div class="so-desc">지성·감정·욕망의 병리를 이해하고, 심리서사분석의 핵심 임상 세션 기법을 이론과 실습으로 함께 배웁니다. 배우는 기법이 동시에 자기 내면에 작동하기 시작합니다.</div>
+        <div class="so-chips">
+          <span class="so-chip">4부 + 5부 전반 (Ch.22–31)</span>
+          <span class="so-chip">임상 세션 기법 습득</span>
+          <span class="so-chip">이론·실습 병행</span>
+          <span class="so-chip">격주 개인분석 세션</span>
+        </div>
+      </div>
+      <div class="week-table-wrap">
+        <table>
+          <thead><tr><th>주차</th><th>강의 제목</th><th>강의 내용</th></tr></thead>
+          <tbody>
+            <tr><td class="wk">1주</td><td><span class="ch-tag ct3">Ch.22</span><br><span class="w-title">불확정성으로서의 감정, 하나의 지점으로서의 욕망</span></td><td><span class="w-sub">감정과 욕망은 왜 근본적으로 다른가</span></td></tr>
+            <tr><td class="wk">2주</td><td><span class="ch-tag ct3">Ch.23</span><br><span class="w-title">능력으로서의 각 영역, 병리로서의 각 영역</span></td><td><span class="w-sub">지성·감정·욕망이 건강할 때와 병들 때</span></td></tr>
+            <tr class="sa-row"><td class="wk">3주</td><td><span class="ch-tag ct-sa">Ch.24</span><br><span class="w-title">경계선 감정 장애·경계선 욕망 장애</span></td><td><span class="w-sub">경계가 무너지는 내면의 고통 / 자기분석 8차 피드백</span></td></tr>
+            <tr><td class="wk">4주</td><td><span class="ch-tag ct3">Ch.25–26</span><br><span class="w-title">감정맹과 욕망맹 — 느끼지 못하고, 원하지 못하는 사람</span></td><td><span class="w-sub">감정맹·욕망맹과의 관계서사에서 발생하는 고통</span></td></tr>
+            <tr><td class="wk">5주</td><td><span class="ch-tag ct3">Ch.27</span><br><span class="w-title">무의식의 문을 여는 열쇠 — 트랜스 유도 [이론]</span></td><td><span class="w-sub">트랜스의 원리, 최면적 서사세계의 성립과 유도 방법론</span></td></tr>
+            <tr class="sa-row"><td class="wk">6주</td><td><span class="ch-tag ct-sa">Ch.27</span><br><span class="w-title">트랜스 유도 [실습] — 무의식에 처음으로 닿는 순간</span></td><td><span class="w-sub">리그레션 실습 / 자기분석 9차 피드백</span></td></tr>
+            <tr><td class="wk">7주</td><td><span class="ch-tag ct3">Ch.28</span><br><span class="w-title">원형의 세계 — 서사적 기호화 기법 [이론]</span></td><td><span class="w-sub">기의·기표 연결의 원리, 무의식의 상징 기호를 읽는 방법</span></td></tr>
+            <tr><td class="wk">8주</td><td><span class="ch-tag ct3">Ch.28</span><br><span class="w-title">서사적 기호화 기법 [실습]</span></td><td><span class="w-sub">기의-기표 연결 실습 / 원형 분석 사례</span></td></tr>
+            <tr class="sa-row"><td class="wk">9주</td><td><span class="ch-tag ct-sa">Ch.29</span><br><span class="w-title">과거가 우리를 지배하는 방식 — 신경증·강박증 사례</span></td><td><span class="w-sub">심리서사분석 임상 사례 (1) / 자기분석 10차 피드백</span></td></tr>
+            <tr><td class="wk">10주</td><td><span class="ch-tag ct3">Ch.30</span><br><span class="w-title">원형이 우리를 지배하는 방식 — 원형 분석 사례</span></td><td><span class="w-sub">집단무의식과 원형 분석 임상 사례 (2)</span></td></tr>
+            <tr><td class="wk">11주</td><td><span class="ch-tag ct3">Ch.31</span><br><span class="w-title">갈라파고스 증후군 — 이상성의 섬 [사례와 치유]</span></td><td><span class="w-sub">갈라파고스 세션의 원리·실습·임상 사례</span></td></tr>
+            <tr class="sa-row"><td class="wk">12주</td><td><span class="ch-tag ct-sa">정리</span><br><span class="w-title">3학기 통합 — 배운 기법이 내 안에서 작동하고 있다</span></td><td><span class="w-sub">개념·기법 통합 / 자기분석 11차 피드백 / 자기 치유 지점 확인</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── 4학기 ── -->
+    <div class="panel" id="p4">
+      <div class="sem-overview so4">
+        <div class="so-num c4">4학기</div>
+        <div class="so-title">분석가로서 첫 발을 내딛다</div>
+        <div class="so-desc">이론의 완성과 임상 실습, 자기분석 슈퍼비전이 함께 이루어지는 학기입니다. 1–3학기 동안 쌓아온 자기분석일지를 토대로 분석가의 시각으로 피드백을 받으며, 수료 후 분석가로 활동할 실전 역량을 갖춥니다.</div>
+        <div class="so-chips">
+          <span class="so-chip">5부 후반 (Ch.32–34)</span>
+          <span class="so-chip">임상 실습</span>
+          <span class="so-chip">자기분석 슈퍼비전</span>
+          <span class="so-chip">견습 분석가 과정</span>
+        </div>
+      </div>
+      <div class="week-table-wrap">
+        <table>
+          <thead><tr><th>주차</th><th>강의 제목</th><th>강의 내용</th></tr></thead>
+          <tbody>
+            <tr><td class="wk">1주</td><td><span class="ch-tag ct4">Ch.32</span><br><span class="w-title">괴물론 — 보이지 않는 가해와 피해 [사례와 치유]</span></td><td><span class="w-sub">괴물론 임상 사례와 관계 회복의 길</span></td></tr>
+            <tr><td class="wk">2주</td><td><span class="ch-tag ct4">Ch.33</span><br><span class="w-title">미성숙한 자아의 성장</span></td><td><span class="w-sub">수치심과 공포를 넘어서 — 자아가 성숙해지는 방식</span></td></tr>
+            <tr class="sa-row"><td class="wk">3주</td><td><span class="ch-tag ct-sa">Ch.34</span><br><span class="w-title">기타 심리서사분석 사례 — 다양한 증상과 삶의 이야기들</span></td><td><span class="w-sub">사례 종합 / 자기분석 12차 피드백 (1–3학기 전체 종합)</span></td></tr>
+            <tr><td class="wk">4주</td><td><span class="ch-tag ct4">실습</span><br><span class="w-title">가계도 분석과 심리서사지도 작성</span></td><td><span class="w-sub">임상에서 내담자의 가계도를 분석하고 심리서사지도 그리기</span></td></tr>
+            <tr><td class="wk">5주</td><td><span class="ch-tag ct4">실습</span><br><span class="w-title">증상 진단 기법</span></td><td><span class="w-sub">폐쇄성·강박성·신경증·정신증 구분 / 원인 중심 진단법</span></td></tr>
+            <tr class="sa-row"><td class="wk">6주</td><td><span class="ch-tag ct-sa">실습</span><br><span class="w-title">텍스트 마이닝 — 내담자 언어 속 서사 읽기</span></td><td><span class="w-sub">심리서사적 언어 분석 방법론 / 자기분석 13차 피드백</span></td></tr>
+            <tr class="sa-row"><td class="wk">7주</td><td><span class="ch-tag ct-sa">슈퍼</span><br><span class="w-title">자기분석 슈퍼비전 (1) — 1–4학기 일지 전체 리뷰</span></td><td><span class="w-sub">48주간의 자기분석일지를 토대로 분석가가 직접 슈퍼비전</span></td></tr>
+            <tr class="sa-row"><td class="wk">8주</td><td><span class="ch-tag ct-sa">슈퍼</span><br><span class="w-title">자기분석 슈퍼비전 (2) — 변화 지점 확인과 방향 제시</span></td><td><span class="w-sub">나는 어떻게 변화했는가 / 분석가로서의 자기 이해 완성</span></td></tr>
+            <tr><td class="wk">9주</td><td><span class="ch-tag ct4">견습</span><br><span class="w-title">견습 분석가 실습 (1) — 첫 세션</span></td><td><span class="w-sub">실습 세션 진행 및 세션 일지 작성</span></td></tr>
+            <tr class="sa-row"><td class="wk">10주</td><td><span class="ch-tag ct-sa">견습</span><br><span class="w-title">견습 분석가 실습 (2) + 슈퍼비전</span></td><td><span class="w-sub">실습 세션 슈퍼비전 / 자기분석일지 최종 피드백</span></td></tr>
+            <tr><td class="wk">11주</td><td><span class="ch-tag ct4">견습</span><br><span class="w-title">견습 분석가 실습 (3) — 사례 발표</span></td><td><span class="w-sub">실습 사례를 그룹 앞에서 발표하고 함께 분석</span></td></tr>
+            <tr class="sa-row"><td class="wk">12주</td><td><span class="ch-tag ct-sa">수료</span><br><span class="w-title">수료식 — 자기 서사를 넘어, 본질로</span></td><td><span class="w-sub">48주 여정의 마무리 / 수료증 수여 / 심리서사분석가 자격 시험 응시 자격 부여</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /tabs-wrap -->
+</main>
+
+<footer>
+  <strong>마음숲 심리상담센터</strong><br>
+  소장 윤지원 · 심리서사분석연구소<br>
+  문의 010-2301-4309 (문자) · etwas75@me.com
+</footer>
+
+<script>
+function go(n, el) {
+  document.querySelectorAll('.tab-btn').forEach(t => {
+    t.className = 'tab-btn';
+  });
+  el.classList.add('on-' + n);
+  document.querySelectorAll('.panel').forEach((p, i) => {
+    p.classList.toggle('active', i === n - 1);
+  });
+}
+</script>
+</body>
+</html>
